@@ -55,17 +55,77 @@ function passwordHashing(password){
     }
     return result;
 }
+
+function specialChacterVerify(mySet){
+    let flag1 = false;
+    let flag2= false;
+    for(let i=33;i<=47;i++){
+        if(mySet.has(String.fromCharCode(i))){
+            flag1=true;
+        }
+    }
+    for(let i=58;i<=64;i++){
+        if(mySet.has(String.fromCharCode(i))){
+            flag2=true;
+        }
+    }
+    if(flag1 || flag2){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function digitVerify(mySet){
+    let flag = false;
+    for(let i=48;i<=57;i++){
+        if(mySet.has(String.fromCharCode(i))){
+            flag=true;
+        }
+    }
+    if(flag){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+function veryfyPassword(password){
+    let mySet = new Set(password)
+    //console.log(mySet)
+   if(specialChacterVerify(mySet) && digitVerify(mySet)){
+    return true;
+   }
+   else{
+    return false;
+   }
+}
 changePassword.addEventListener("click",(e)=>{
     e.preventDefault();
     
     let userDetails = JSON.parse(localStorage.getItem("userDetails"))
     if((oldPassword.value===verifyPassword(userIndex,userDetails))){
-        if(newPassword.value===ConNewPassword.value){
-            userDetails[userIndex].password=passwordHashing(newPassword.value);
-            localStorage.setItem("userDetails",JSON.stringify(userDetails));
-            newPassword.value="";
-            oldPassword.value="";
-            ConNewPassword.value="";
+        if(newPassword.value===ConNewPassword.value && newPassword.value.trim()!=""){
+            
+            if(newPassword.value.length>=8){
+                if(veryfyPassword(newPassword.value)){
+                       userDetails[userIndex].password=passwordHashing(newPassword.value);
+                       localStorage.setItem("userDetails",JSON.stringify(userDetails));
+                       newPassword.value="";
+                       oldPassword.value="";
+                       ConNewPassword.value="";
+                }
+                else{
+                    // verifyText.innerText="Error: Password should contains one special chachcter,one digit"
+                    // verifyText.style.color="red";
+                    alert("Error: Password should contains one special chachcter,one digit")
+                }
+           }else{
+                // verifyText.innerText="Error: Password length should be greater than or equal to 8"
+                // verifyText.style.color="red";
+                alert("Error: New Password length should be greater than or equal to 8")
+           }
         }else{
             alert("New Password and Confirm Password didn't matches")
         }
