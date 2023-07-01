@@ -115,6 +115,7 @@ changePassword.addEventListener("click",(e)=>{
                        newPassword.value="";
                        oldPassword.value="";
                        ConNewPassword.value="";
+                       alert("Password changed successfully")
                 }
                 else{
                     // verifyText.innerText="Error: Password should contains one special chachcter,one digit"
