@@ -21,15 +21,6 @@
 
  let originalPosition = window.pageYOffset;
 
-window.addEventListener("scroll", function() {
-   let currentPosition = window.pageYOffset;
-   if (currentPosition <= originalPosition) {
-        searchInput.style.display = "block";
-   } else {
-        searchInput.style.display = "none";
-   }
-});
-
  if(userName){
     profile.innerText=`Hi, ${userName}`
     // localStorage.removeItem("userName");
@@ -672,7 +663,14 @@ electronics.addEventListener('click',(e)=>{
 // search functionalaty code
 let searchInput = document.getElementById("search-input");
 
-
+window.addEventListener("scroll", function() {
+   let currentPosition = window.pageYOffset;
+   if (currentPosition <= originalPosition) {
+        searchInput.style.display = "block";
+   } else {
+        searchInput.style.display = "none";
+   }
+});
 function debounce(loadData, timer) {
     let timerId;
     return ((e) => {
