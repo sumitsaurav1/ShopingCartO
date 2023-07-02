@@ -38,7 +38,9 @@ login.addEventListener("click",(e)=>{
         verifyText.innerText="";
        
         if(userDetails[emailIndex].email===email.value && password.value===verifyPassword(emailIndex,userDetails)){
-            userDetails[emailIndex].accessToken = generateAccessToken();
+            let token = generateAccessToken();
+            userDetails[emailIndex].accessToken = token;
+            localStorage.setItem('token',token)
             localStorage.setItem("userDetails", JSON.stringify(userDetails))
            // console.log("accsess",userDetails[emailIndex].accessToken)
             localStorage.setItem("userName",`${userDetails[emailIndex].firstName} ${userDetails[emailIndex].lastName}`)
