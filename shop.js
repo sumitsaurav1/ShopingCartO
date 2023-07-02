@@ -82,7 +82,7 @@ function f(cartDetails){
 f(cartDetails)
 
 localStorage.setItem("cartDetails",JSON.stringify(cartDetails))
-let data = JSON.parse(localStorage.getItem("productList"))
+// let data = JSON.parse(localStorage.getItem("productList"))
 
 function getUserCartDetails(cartDetails){
     let r;
