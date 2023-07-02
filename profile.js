@@ -142,6 +142,7 @@ logout.addEventListener("click",(e)=>{
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link)
+    localStorage.removeItem('token')
 })
 
 
