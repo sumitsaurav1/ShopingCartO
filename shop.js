@@ -20,7 +20,7 @@
  let userName = localStorage.getItem("userName");
 
  let originalPosition = window.pageYOffset;
-
+ let data;
  if(userName){
     profile.innerText=`Hi, ${userName}`
     // localStorage.removeItem("userName");
@@ -51,13 +51,14 @@ loadProducts();
 let colors = ["red","blue","black"];
 let size = ["s","m",'l',"xl"];
 
-function modifyData(data){
-    data.forEach((product)=>{
+function modifyData(data1){
+    data1.forEach((product)=>{
         product.color=randomColor();
         product.size=randomSize();
     })
-    localStorage.setItem("productList",JSON.stringify(data));
-    
+    localStorage.setItem("productList",JSON.stringify(data1));
+    data= JSON.parse(localStorage.getItem("productList"))
+    showData()
 }
 function randomColor(){
     let randomIndex = Math.floor(Math.random()*colors.length);
@@ -143,7 +144,7 @@ function showData(){
     }
 
 }
-showData()
+// showData()
 
 let filterData = []
 console.log(data)
